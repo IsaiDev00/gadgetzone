@@ -1,19 +1,24 @@
+// header.component.ts
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, NgClass],
   template: `
-    <header>
+    <header (mouseenter)="hover(true)" (mouseleave)="hover(false)" [ngClass]="{ 'hovered': isHovered }">
       <nav class="container">
-        <h1>GadgetZone</h1>
+        <div class="logo">
+          <a routerLink="/">
+            <img src="assets/logo.png" alt="GadgetZone Logo">
+          </a>
+        </div>
         <ul>
-          <li><a routerLink="/">Inicio</a></li>
-          <li><a routerLink="/productos">Productos</a></li>
-          <li><a routerLink="/carrito">Carrito</a></li>
-          <li><a routerLink="/cuenta">Mi Cuenta</a></li>
+          <li><a routerLink="/productos"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box"><path d="M21 16V8a2 2 0 0 0-1-1.73L12 2 4 6.27A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73L12 22l8-4.27A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></a></li>
+          <li><a routerLink="/carrito"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61l1.6-9H6"></path></svg></a></li>
+          <li><a routerLink="/cuenta"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20.42 19.61A16 16 0 0 0 12 17a16 16 0 0 0-8.42 2.61"></path><circle cx="12" cy="7" r="4"></circle></svg></a></li>
         </ul>
       </nav>
     </header>
@@ -23,10 +28,19 @@ import { RouterLink } from '@angular/router';
       background-color: #333;
       color: white;
       padding: 10px 0;
+      transition: background-color 0.3s ease;
+    }
+    header.hovered {
+      background-color: black;
     }
     nav {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      justify-content: center;
       align-items: center;
     }
     ul {
@@ -40,7 +54,22 @@ import { RouterLink } from '@angular/router';
     a {
       color: white;
       text-decoration: none;
+      font-size: 1.5em;
+    }
+    img {
+      height: 40px;
+    }
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke: white;
     }
   `]
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  isHovered = false;
+
+  hover(state: boolean) {
+    this.isHovered = state;
+  }
+}

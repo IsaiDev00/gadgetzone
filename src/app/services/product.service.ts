@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { Product } from '../models/product.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +18,27 @@ export class ProductService {
     // Agrega más productos aquí
   ];
 
-  getProducts(): Observable<Product[]> {
-    return of(this.products);
-  }
-
   getProduct(id: number): Observable<Product | undefined> {
     return of(this.products.find(product => product.id === id));
   }
 
-  // Aquí se implementarían métodos para agregar, actualizar y eliminar productos
+  getProducts(): Observable<Product[]> {
+    return of(this.products);
+  }
+
+  createProduct(product: Product): void {
+    product.id = this.products.length + 1;
+    this.products.push(product);
+  }
+
+  updateProduct(product: Product): void {
+    const index = this.products.findIndex(p => p.id === product.id);
+    if (index !== -1) {
+      this.products[index] = product;
+    }
+  }
+
+  deleteProduct(productId: number): void {
+    this.products = this.products.filter(product => product.id !== productId);
+  }
 }

@@ -1,0 +1,21 @@
+<div>
+    <form [formGroup]="productForm" (ngSubmit)="editingProduct ? updateProduct() : createProduct()">
+      <input formControlName="name" placeholder="Nombre del producto" required />
+      <textarea formControlName="description" placeholder="Descripción" required></textarea>
+      <input type="number" formControlName="price" placeholder="Precio" required />
+      <input type="number" formControlName="stock" placeholder="Stock" required />
+      <input formControlName="imageUrl" placeholder="URL de la imagen" required />
+      <button type="submit">{{ editingProduct ? 'Actualizar' : 'Crear' }} Producto</button>
+      <button type="button" (click)="cancelEdit()" *ngIf="editingProduct">Cancelar</button>
+    </form>
+  
+    <div *ngFor="let product of products">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <p>Precio: ${{ product.price }}</p>
+      <p>Stock: {{ product.stock }}</p>
+      <img [src]="product.imageUrl" [alt]="product.name" />
+      <button (click)="editProduct(product)">Editar</button>
+      <button (click)="deleteProduct(product.id)">Eliminar</button>
+    </div>
+  </div>

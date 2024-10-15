@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product.model';
+import { Product } from '../../models/product.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -26,7 +26,7 @@ export class ProductService {
     return of(this.products);
   }
 
-  createProduct(product: Product): void {
+  addProduct(product: Product): void {
     product.id = this.products.length + 1;
     this.products.push(product);
   }

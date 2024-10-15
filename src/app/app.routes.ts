@@ -3,6 +3,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AccountComponent } from './components/account/account.component';
+import { ProductManagementComponent } from './components/product-management/product-management.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/productos', pathMatch: 'full' },
@@ -10,4 +11,5 @@ export const routes: Routes = [
   { path: 'producto/:id', component: ProductDetailComponent },
   { path: 'carrito', component: CartComponent },
   { path: 'cuenta', component: AccountComponent },
+  { path: 'gestion-productos', component: ProductManagementComponent},
 ];

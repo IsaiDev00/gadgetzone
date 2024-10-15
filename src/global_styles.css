@@ -1,4 +1,11 @@
 /* Estilos globales */
+@font-face {
+  font-family: 'font1';
+  src: url('./assets/fonts/font1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;

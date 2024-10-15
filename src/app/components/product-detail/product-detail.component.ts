@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../models/product.model';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,7 +16,8 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService // Inyecta el servicio de carrito
   ) {}
 
   ngOnInit() {
@@ -26,7 +28,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() {
-    // Implementar lógica para agregar al carrito
-    console.log('Producto agregado al carrito');
+    if (this.product) {
+      this.cartService.addToCart(this.product); // Llama al método para agregar al carrito
+      console.log('Producto agregado al carrito:', this.product);
+    }
   }
 }

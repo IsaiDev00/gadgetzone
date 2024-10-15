@@ -12,7 +12,7 @@ import { NgClass } from '@angular/common';
       <nav class="container">
         <div class="logo">
           <a routerLink="/">
-            <img src="assets/logo.png" alt="GadgetZone Logo">
+          <h1>GZ</h1>
           </a>
         </div>
         <ul>
@@ -64,6 +64,9 @@ import { NgClass } from '@angular/common';
       height: 24px;
       stroke: white;
     }
+    h1 {
+    font-family: 'font1', sans-serif;
+  }
   `]
 })
 export class HeaderComponent {

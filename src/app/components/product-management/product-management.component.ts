@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
 import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-product-management',
   standalone: true,
-  imports: [CommonModule],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule], // Añade FormsModule aquí
   templateUrl: './product-management.component.html',
   styleUrls: ['./product-management.component.css']
 })
@@ -27,21 +26,18 @@ export class ProductManagementComponent {
   }
 
   addProduct() {
-    this.productService.addProduct(this.newProduct).subscribe(() => {
-      this.loadProducts();
-      this.newProduct = { id: 0, name: '', description: '', price: 0, stock: 0, imageUrl: '' };
-    });
+    this.productService.addProduct(this.newProduct);
+    this.loadProducts();
+    this.newProduct = { id: 0, name: '', description: '', price: 0, stock: 0, imageUrl: '' };
   }
 
   updateProduct(product: Product) {
-    this.productService.updateProduct(product).subscribe(() => {
-      this.loadProducts();
-    });
+    this.productService.updateProduct(product);
+    this.loadProducts();
   }
 
   deleteProduct(productId: number) {
-    this.productService.deleteProduct(productId).subscribe(() => {
-      this.loadProducts();
-    });
+    this.productService.deleteProduct(productId);
+    this.loadProducts();
   }
 }

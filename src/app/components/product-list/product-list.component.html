@@ -1,11 +1,12 @@
-
-    <h2>Catálogo de Productos</h2>
-    <div class="product-grid">
-      <div *ngFor="let product of products" class="product-card">
-        <img [src]="product.imageUrl" [alt]="product.name">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <p>Precio: ${{ product.price.toFixed(2) }}</p>
-        <button class="btn btn-primary" [routerLink]="['/producto', product.id]">Ver Detalles</button>
-      </div>
-    </div>
+<h2>Catálogo de Productos</h2>
+<div class="product-grid">
+  <div *ngFor="let product of products" class="product-card">
+    <img [src]="product.imageUrl ? product.imageUrl : 'https://via.placeholder.com/150'" [alt]="product.name ? product.name : 'Product without name'">
+    <h3>{{ product.name ? product.name : 'Product without name' }}</h3>
+    <p>{{ product.description ? product.description : 'Description not available' }}</p>
+    <p>
+      Precio: ${{ getFormattedPrice(product.price) }}
+    </p>
+    <a class="btn btn-primary" [routerLink]="['/producto', product.id]">Ver Detalles</a>
+  </div>
+</div>

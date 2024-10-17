@@ -3,6 +3,6 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  stock: number; // Añadir propiedad 'stock'
   imageUrl: string;
-  stock: number;
 }

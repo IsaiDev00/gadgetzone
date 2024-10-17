@@ -1,24 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-product-list',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  standalone: true,
+  imports: [CommonModule, RouterModule] // Asegúrate de importar RouterModule aquí
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent {
   products: Product[] = [];
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.productService.getProducts().subscribe(products => {
-      this.products = products;
-    });
+    this.productService.getProducts().subscribe(
+      products => {
+        console.log('Productos recibidos:', products); // Verificar la estructura de los productos
+        this.products = products;
+      },
+      error => {
+        console.error('Error al cargar los productos:', error);
+      }
+    );
   }
+  
+  getFormattedPrice(price: any): string {
+    const numericPrice = parseFloat(price);
+    return !isNaN(numericPrice) ? numericPrice.toFixed(2) : '0.00';
+  }
+  
+
 }

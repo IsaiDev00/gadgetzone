@@ -1,6 +1,29 @@
 <h2>Catálogo de Productos</h2>
 <div class="product-grid">
   <div *ngFor="let product of products" class="product-card">
+    <div class="product-image">
+      <img [src]="product.imageUrl ? product.imageUrl : 'https://via.placeholder.com/150'" [alt]="product.name ? product.name : 'Product without name'">
+    </div>
+    <div class="product-details">
+      <h3>{{ product.name ? product.name : 'Product without name' }}</h3>
+      <p>{{ product.description ? product.description : 'Description not available' }}</p>
+      <p class="product-price">
+        Precio: ${{ getFormattedPrice(product.price) }}
+      </p>
+      <a style="background-color: black;" class="btn btn-primary" [routerLink]="['/producto', product.id]">Ver Detalles</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--
+Código pasado
+<h2>Catálogo de Productos</h2>
+<div class="product-grid">
+  <div *ngFor="let product of products" class="product-card">
     <img [src]="product.imageUrl ? product.imageUrl : 'https://via.placeholder.com/150'" [alt]="product.name ? product.name : 'Product without name'">
     <h3>{{ product.name ? product.name : 'Product without name' }}</h3>
     <p>{{ product.description ? product.description : 'Description not available' }}</p>
@@ -9,4 +32,4 @@
     </p>
     <a class="btn btn-primary" [routerLink]="['/producto', product.id]">Ver Detalles</a>
   </div>
-</div>
+</div>-->

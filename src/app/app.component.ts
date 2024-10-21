@@ -16,8 +16,8 @@ import { FooterComponent } from './components/footer/footer.component';
   `,
   styles: [`
     main {
-      padding: 20px 0;
-    }
+  padding: 20px 0;
+  }
   `]
 })
 export class AppComponent {

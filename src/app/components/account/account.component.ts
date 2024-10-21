@@ -6,71 +6,149 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="account-container">
-      <h2>Datos de la Cuenta</h2>
-      <div class="account-details">
-        <p><strong>Nombre Completo:</strong> {{ user.fullName }}</p>
-        <p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
-      </div>
+  <div class="account-container">
+    <div class="account-header">
+      <h2>Perfil de Cuenta</h2>
+      <!--<button class="edit-button">Editar Perfil</button>-->
+    </div>
+    <div class="account-details">
+      <p><strong>Nombre Completo:</strong> {{ user.fullName }}</p>
+      <p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
+    </div>
 
-      <h3>Historial de Pedidos</h3>
-      <div *ngIf="orders.length > 0; else noOrders" class="order-list">
-        <div class="order-item" *ngFor="let order of orders">
-          <p>Pedido #{{ order.id }} - Fecha: {{ order.date | date:'short' }}</p>
-          <p>Total: {{ order.total | currency }}</p>
-          <p>Status: {{ order.status }}</p>
+    <h3>Historial de Pedidos</h3>
+    <div *ngIf="orders.length > 0; else noOrders" class="order-list">
+      <div class="order-item" *ngFor="let order of orders">
+        <div class="order-header">
+          <p><strong>Pedido #{{ order.id }}</strong></p>
+          <p>{{ order.date | date:'medium' }}</p>
+        </div>
+        <div class="order-body">
+          <p>Total: <strong>{{ order.total | currency }}</strong></p>
+          <p class="order-status" [ngClass]="getOrderStatusClass(order.status)">
+            Status: {{ order.status }}
+          </p>
         </div>
       </div>
-      <ng-template #noOrders>
-        <p>No tienes pedidos en tu historial.</p>
-      </ng-template>
     </div>
-  `,
-  styles: [`
-    .account-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+    <ng-template #noOrders>
+      <p>No tienes pedidos en tu historial.</p>
+    </ng-template>
+  </div>
+`,
+styles: [`
+  .account-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
 
-    h2 {
-      font-size: 2em;
-      color: #333;
-      margin-bottom: 20px;
-      text-align: center;
-    }
+  .account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
 
-    .account-details {
-      margin-bottom: 30px;
-    }
+  h2 {
+    font-size: 2.5em;
+    color: #333;
+    margin: 0;
+  }
 
-    h3 {
-      font-size: 1.5em;
-      color: #555;
-      margin-bottom: 15px;
-    }
+  .edit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
 
-    .order-list {
-      margin-top: 20px;
-    }
+  .edit-button:hover {
+    background-color: #0056b3;
+  }
 
-    .order-item {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-      padding: 15px;
-      margin-bottom: 15px;
-    }
+  .account-details {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+  }
 
-    p {
-      margin: 5px 0;
-      font-size: 1em;
-      color: #777;
-    }
-  `]
+  .account-details p {
+    font-size: 1.1em;
+    color: #555;
+    margin: 10px 0;
+  }
+
+  h3 {
+    font-size: 1.8em;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  .order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .order-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+  }
+
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  .order-body p {
+    margin: 5px 0;
+    font-size: 1.1em;
+    color: #555;
+  }
+
+  .order-status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+
+  .order-status.delivered {
+    background-color: #28a745;
+    color: white;
+  }
+
+  .order-status.in-process {
+    background-color: #ffc107;
+    color: white;
+  }
+
+  .order-status.pending {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  p {
+    font-size: 1em;
+    color: #777;
+  }
+`]
 })
 export class AccountComponent {
   user = {
@@ -82,4 +160,13 @@ export class AccountComponent {
     { id: 1, date: new Date(), total: 150.75, status: 'Entregado' },
     { id: 2, date: new Date(), total: 75.00, status: 'En Proceso' },
   ];
+
+  getOrderStatusClass(status: string): string {
+    switch (status.toLowerCase()) {
+      case 'entregado': return 'delivered';
+      case 'en proceso': return 'in-process';
+      case 'pendiente': return 'pending';
+      default: return '';
+    }
+  }
 }

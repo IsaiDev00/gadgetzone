@@ -1,0 +1,40 @@
+<h2>Gestión de Productos</h2>
+
+<!-- Contenedor principal para el formulario y la lista -->
+<div class="product-management">
+  <!-- Formulario para Agregar/Editar Productos -->
+  <div class="form-container">
+    <h3>{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h3>
+    <form (submit)="isEditing ? updateProduct() : addProduct()">
+      <label>Nombre:</label>
+      <input [(ngModel)]="selectedProduct.name" required />
+
+      <label>Descripción:</label>
+      <textarea [(ngModel)]="selectedProduct.description"></textarea>
+
+      <label>Precio:</label>
+      <input type="number" [(ngModel)]="selectedProduct.price" min="0" required />
+
+      <label>Stock:</label>
+      <input type="number" [(ngModel)]="selectedProduct.stock" min="0" required />
+
+      <label>Imagen URL:</label>
+      <input [(ngModel)]="selectedProduct.imageUrl" />
+
+      <button type="submit">{{ isEditing ? 'Actualizar' : 'Agregar' }} Producto</button>
+      <button type="button" (click)="clearSelection()">Cancelar</button>
+    </form>
+  </div>
+
+  <!-- Lista de Productos Existentes -->
+  <div class="list-container">
+    <h3>Lista de Productos</h3>
+    <ul>
+      <li *ngFor="let product of products">
+        <strong>{{ product.name }}</strong> - ${{ product.price.toFixed(2) }}
+        <button (click)="editProduct(product)">Editar</button>
+        <button style="background-color: #d9534f;" (click)="deleteProduct(product.id)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+</div>

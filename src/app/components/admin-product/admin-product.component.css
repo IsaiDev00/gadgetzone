@@ -1,0 +1,116 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  
+  /* Contenedor principal */
+  .product-management {
+    display: flex;
+    gap: 20px; /* Espacio entre columnas */
+  }
+  
+  /* Contenedor del formulario */
+  .form-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1; /* Tomar espacio proporcional en la columna */
+  }
+  
+  /* Contenedor de la lista de productos */
+  .list-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1; /* Tomar espacio proporcional en la columna */
+    max-height: 400px; /* Altura máxima para la lista */
+    overflow-y: auto; /* Agregar scroll si es necesario */
+  }
+  
+  /* Encabezados */
+  h2, h3 {
+    text-align: center;
+    color: #4a90e2;
+  }
+  
+  /* Etiquetas del formulario */
+  label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
+  
+  /* Campos de entrada */
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    transition: border-color 0.3s;
+  }
+  
+  /* Estilo de los campos al enfocarse */
+  input:focus,
+  textarea:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+  
+  /* Botones */
+  button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Efecto al pasar el ratón sobre los botones */
+  button:hover {
+    background-color: #357ab8;
+  }
+  
+  /* Estilo del botón de cancelar */
+  button[type="button"] {
+    background-color: #d9534f;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #c9302c;
+  }
+  
+  /* Lista de productos */
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  strong {
+    color: #333;
+  }
+  

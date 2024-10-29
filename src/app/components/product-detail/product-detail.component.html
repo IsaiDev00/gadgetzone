@@ -1,0 +1,9 @@
+<h1>ESTÁS EN EL APARTADO DE DETALLES DEL COMPONENTE</h1>
+<div *ngIf="product">
+  <h2>{{ product?.name || 'Producto sin nombre' }}</h2>
+  <img [src]="product?.imageUrl || 'https://via.placeholder.com/150'" [alt]="product?.name || 'Imagen no disponible'">
+  <p>{{ product?.description || 'Descripción no disponible' }}</p>
+  <!--<p>Precio: ${{ product?.price != null ? product.price.toFixed(2) : 'N/A' }}</p>-->
+  <p>Stock: {{ product?.stock || 'No disponible' }}</p>
+  <button class="btn btn-primary" (click)="addToCart()">Agregar al Carrito</button>
+</div>

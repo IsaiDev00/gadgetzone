@@ -39,8 +39,18 @@ export class ProductService {
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`);
-  }  
+    return this.http.get<ApiProduct>(`${this.apiUrl}/${id}`).pipe(
+      map((product: ApiProduct) => ({
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        stock: product.stock,
+        imageUrl: product.image_url // Mapeamos image_url a imageUrl
+      }))
+    );
+  }
+  
 
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.apiUrl, product);

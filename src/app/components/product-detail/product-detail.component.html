@@ -1,19 +1,27 @@
-<div class="container mt-5" *ngIf="product">
+<div *ngIf="loading" class="text-center mt-5">
+  <p>Cargando producto...</p>
+</div>
+
+<div class="container mt-5" *ngIf="!loading && product">
   <div class="card">
     <div class="row g-0">
       <div class="col-md-6">
-        <img 
-          [src]="product?.imageUrl ? product.imageUrl : 'https://via.placeholder.com/150'" 
-          [alt]="product?.name ? product.name : 'Imagen no disponible'" 
+        <img
+          [src]="product.imageUrl || 'https://via.placeholder.com/150'"
+          [alt]="product.name || 'Imagen no disponible'"
           class="img-fluid rounded-start"
-        >
+        />
       </div>
       <div class="col-md-6">
         <div class="card-body">
-          <h1 class="card-title">{{ product?.name || 'Producto sin nombre' }}</h1>
-          <p class="card-text">{{ product?.description || 'Descripción no disponible' }}</p>
-          <p class="card-text"><strong>Precio:</strong> {{ product?.price != null ? ('$' + product.price.toFixed(2)) : 'N/A' }}</p>
-          <p class="card-text"><strong>Stock:</strong> {{ product?.stock != null ? product.stock : 'No disponible' }}</p>
+          <h1 class="card-title">{{ product.name || 'Producto sin nombre' }}</h1>
+          <p class="card-text">{{ product.description || 'Descripción no disponible' }}</p>
+          <p class="card-text">
+            <strong>Precio:</strong> {{ getFormattedPrice() }}
+          </p>                 
+          <p class="card-text">
+            <strong>Stock:</strong> {{ product.stock != null ? product.stock : 'No disponible' }}
+          </p>
           <button class="btn btn-primary mt-3" (click)="addToCart()">Agregar al Carrito</button>
         </div>
       </div>

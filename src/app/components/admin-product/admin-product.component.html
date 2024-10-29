@@ -31,7 +31,8 @@
     <h3>Lista de Productos</h3>
     <ul>
       <li *ngFor="let product of products">
-        <strong>{{ product.name }}</strong> - ${{ product.price.toFixed(2) }}
+        <strong>{{ product.name }}</strong> - 
+        <strong>{{ product.price != null ? ('$' + product.price.toFixed(2)) : 'N/A' }}</strong>
         <button (click)="editProduct(product)">Editar</button>
         <button style="background-color: #d9534f;" (click)="deleteProduct(product.id)">Eliminar</button>
       </li>

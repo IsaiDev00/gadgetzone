@@ -26,13 +26,14 @@
             }
           },
           "options": {
-            "assets": [],
+            "assets": ["src/assets",
+              "src/favicon.ico"],
             "index": "src/index.html",
             "browser": "src/main.ts",
             "outputPath": "dist/demo",
             "polyfills": ["zone.js"],
-            "scripts": [],
-            "styles": ["src/global_styles.css"],
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
+            "styles": ["node_modules/bootstrap/dist/css/bootstrap.min.css", "src/global_styles.css"],
             "tsConfig": "tsconfig.app.json"
           }
         },

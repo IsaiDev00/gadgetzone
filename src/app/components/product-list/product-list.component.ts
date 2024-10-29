@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../models/product.model';
+import { HighlightBannerComponent } from '../highlight-banner/highlight-banner.component'; // Importa el componente
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrl:'./product-list.component.css',
+  styleUrls: ['./product-list.component.css'],
   standalone: true,
-  imports: [CommonModule, RouterModule] // Asegúrate de importar RouterModule aquí
+  imports: [CommonModule, RouterModule, HighlightBannerComponent] // Añade el componente a los imports
 })
 export class ProductListComponent {
   products: Product[] = [];
@@ -27,11 +28,9 @@ export class ProductListComponent {
       }
     );
   }
-  
+
   getFormattedPrice(price: any): string {
     const numericPrice = parseFloat(price);
     return !isNaN(numericPrice) ? numericPrice.toFixed(2) : '0.00';
   }
-  
-
 }

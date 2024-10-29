@@ -1,0 +1,14 @@
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body h1 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  
+  .img-fluid {
+    border-radius: 12px 0 0 12px;
+  }
+  

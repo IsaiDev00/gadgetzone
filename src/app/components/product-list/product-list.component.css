@@ -8,64 +8,74 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   padding: 15px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
   cursor: pointer;
+  height: 320px; /* Hacer la tarjeta cuadrada */
+  position: relative;
 }
 
-.product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 4px 15px rgba(0, 10, 0, 0.5);
+.product-card:hover .product-image img {
+  transform: scale(1.05); /* Incrementa ligeramente el tamaño de la imagen */
+}
+
+.product-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product-image img {
-  width: 100%;
-  height: 200px;
+  max-width: 100%;
+  height: 150px;
   object-fit: contain;
-  margin-bottom: 15px;
+  transition: transform 0.3s ease; /* Animación para agrandar imagen */
 }
 
 .product-details {
-  text-align: left;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .product-details h3 {
-  font-size: 1.25em;
+  font-size: 1em; /* Reducir el tamaño del texto del nombre */
   color: #333;
   margin: 10px 0;
+  min-height: 30px; /* Establecer una altura mínima para los títulos */
 }
 
-.product-details p {
-  font-size: 0.9em;
-  color: #666;
-  margin: 5px 0;
+.product-button {
+  margin-top: 10px; /* Espacio entre el nombre y el botón */
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.product-price {
-  font-weight: bold;
-  color: #e67e22;
-  margin-bottom: 10px;
+.product-card:hover .product-button {
+  opacity: 1;
+  transform: translateY(0); /* Mostrar el botón */
 }
 
 .btn {
-  background-color: #0073bb;
+  background-color: #000; /* Color negro para el botón */
   color: white;
   text-align: center;
-  padding: 10px;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   text-decoration: none;
   font-size: 0.9em;
   transition: background-color 0.3s ease;
-  display: block;
+  display: inline-block;
 }
 
 .btn:hover {
-  background-color: #005fa3;
+  background-color: #333; /* Cambiar el color del botón al pasar el mouse */
 }
 
 @media (max-width: 768px) {
@@ -73,17 +83,11 @@
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 
+  .product-card {
+    height: 280px; /* Ajustar altura para mantener proporciones en móviles */
+  }
+
   .product-image img {
-    height: 150px;
+    height: 120px; /* Ajustar tamaño de la imagen en móviles */
   }
 }
-
-
-
-
-
-/*.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }*/

@@ -69,7 +69,7 @@ export class CartComponent implements OnInit {
 
   increaseQuantity(cartItem: CartItem) {
     this.cartService.updateCartItemQuantity(cartItem.cartId, cartItem.quantity + 1).subscribe(
-      (updatedItem) => {
+      () => {
         cartItem.quantity++;
       },
       (error) => console.error('Error al incrementar la cantidad:', error)
@@ -79,7 +79,7 @@ export class CartComponent implements OnInit {
   decreaseQuantity(cartItem: CartItem) {
     if (cartItem.quantity > 1) {
       this.cartService.updateCartItemQuantity(cartItem.cartId, cartItem.quantity - 1).subscribe(
-        (updatedItem) => {
+        () => {
           cartItem.quantity--;
         },
         (error) => console.error('Error al disminuir la cantidad:', error)
@@ -89,7 +89,21 @@ export class CartComponent implements OnInit {
       this.removeFromCart(cartItem);
     }
   }
-  
-  
-  
+
+  // Calcular el precio total de los ítems en el carrito
+  getTotalPrice(): string {
+    const total = this.cartItems.reduce((sum, item) => {
+      const price = parseFloat(item.price as unknown as string);
+      if (!isNaN(price)) {
+        return sum + price * item.quantity;
+      }
+      return sum;
+    }, 0);
+    return `$${total.toFixed(2)}`;
+  }
+
+  // Método placeholder para el botón de "Pagar"
+  pay() {
+    console.log('Pago iniciado');
+  }
 }

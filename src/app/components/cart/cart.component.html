@@ -21,6 +21,11 @@
     </div>
   </div>
 
+  <div class="cart-summary" *ngIf="cartItems.length > 0">
+    <p>Total: {{ getTotalPrice() }}</p>
+    <button class="pay-btn" (click)="pay()">Pagar</button>
+  </div>
+
   <ng-template #emptyCart>
     <p>El carrito está vacío.</p>
   </ng-template>

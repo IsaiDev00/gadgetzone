@@ -102,14 +102,15 @@ export class CartComponent implements OnInit {
     return `$${total.toFixed(2)}`;
   }
 
-  // Método placeholder para el botón de "Pagar"
+  // Método para manejar el pago
   pay() {
-    const userId = 1; // Suponiendo que el userId es 1
+    const userId = 1;
   
     this.cartService.createCheckoutSession(userId).subscribe(
       (response: any) => {
         if (response.url) {
-          window.location.href = response.url; // Redirigir al enlace de Stripe
+          // Redirigir al enlace de Stripe, Stripe se encargará de redirigir a la URL de éxito al finalizar
+          window.location.href = response.url;
         }
       },
       (error) => {
@@ -117,6 +118,26 @@ export class CartComponent implements OnInit {
       }
     );
   }
+
+  downloadReceipt() {
+    const userId = 1; // Suponiendo que el userId es 1
+  
+    this.cartService.getReceipt(userId).subscribe(
+      (response) => {
+        const blob = new Blob([response], { type: 'application/xml' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'receipt.xml';
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      (error) => {
+        console.error('Error al descargar el recibo:', error);
+      }
+    );
+  }
+  
 }
 
 

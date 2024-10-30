@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CartItem } from '../../models/cart.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -36,5 +37,12 @@ updateCartItemQuantity(cartId: number, quantity: number): Observable<void> {
 createCheckoutSession(userId: number): Observable<any> {
   return this.http.post<any>(`${this.apiUrl}/create-checkout-session/${userId}`, {});
 }
+
+  // Obtener el recibo en formato XML
+  getReceipt(userId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/receipt/${userId}`, {
+      responseType: 'blob',
+    });
+  }
 
 }

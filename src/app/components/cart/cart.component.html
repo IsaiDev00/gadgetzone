@@ -24,7 +24,8 @@
   <div class="cart-summary" *ngIf="cartItems.length > 0">
     <p>Total: {{ getTotalPrice() }}</p>
     <button class="pay-btn" (click)="pay()">Pagar</button>
-  </div>
+    <button class="receipt-btn" (click)="downloadReceipt()">Descargar Recibo</button>
+  </div>  
 
   <ng-template #emptyCart>
     <p>El carrito está vacío.</p>

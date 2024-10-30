@@ -104,6 +104,19 @@ export class CartComponent implements OnInit {
 
   // Método placeholder para el botón de "Pagar"
   pay() {
-    console.log('Pago iniciado');
+    const userId = 1; // Suponiendo que el userId es 1
+  
+    this.cartService.createCheckoutSession(userId).subscribe(
+      (response: any) => {
+        if (response.url) {
+          window.location.href = response.url; // Redirigir al enlace de Stripe
+        }
+      },
+      (error) => {
+        console.error('Error al iniciar el proceso de pago:', error);
+      }
+    );
   }
 }
+
+

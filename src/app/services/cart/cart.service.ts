@@ -32,5 +32,9 @@ updateCartItemQuantity(cartId: number, quantity: number): Observable<void> {
   return this.http.put<void>(`${this.apiUrl}/${cartId}`, { quantity });
 }
 
+// Crear una sesión de checkout con Stripe
+createCheckoutSession(userId: number): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/create-checkout-session/${userId}`, {});
+}
 
 }

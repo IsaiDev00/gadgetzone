@@ -5,21 +5,24 @@
   <!-- Formulario para Agregar/Editar Productos -->
   <div class="form-container">
     <h3>{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h3>
-    <form (submit)="isEditing ? updateProduct() : addProduct()">
+    <form (ngSubmit)="isEditing ? updateProduct() : addProduct()">
       <label>Nombre:</label>
-      <input [(ngModel)]="selectedProduct.name" required />
+      <input [(ngModel)]="selectedProduct.name" name="name" required />
 
       <label>Descripción:</label>
-      <textarea [(ngModel)]="selectedProduct.description"></textarea>
+      <textarea [(ngModel)]="selectedProduct.description" name="description"></textarea>
 
       <label>Precio:</label>
-      <input type="number" [(ngModel)]="selectedProduct.price" min="0" required />
+      <input type="number" [(ngModel)]="selectedProduct.price" name="price" min="0" required />
 
       <label>Stock:</label>
-      <input type="number" [(ngModel)]="selectedProduct.stock" min="0" required />
+      <input type="number" [(ngModel)]="selectedProduct.stock" name="stock" min="0" required />
 
       <label>Imagen URL:</label>
-      <input [(ngModel)]="selectedProduct.imageUrl" />
+      <input [(ngModel)]="selectedProduct.imageUrl" name="imageUrl" />
+
+      <label>Activo:</label>
+      <input type="checkbox" [(ngModel)]="selectedProduct.active" name="active" />
 
       <button type="submit">{{ isEditing ? 'Actualizar' : 'Agregar' }} Producto</button>
       <button type="button" (click)="clearSelection()">Cancelar</button>
@@ -38,4 +41,4 @@
       </li>
     </ul>
   </div>
-</div>
+</div> 

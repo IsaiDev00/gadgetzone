@@ -43,10 +43,14 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart() {
     if (this.product) {
-      this.cartService.addToCart(this.product);
-      console.log('Producto agregado al carrito:', this.product);
+      const userId = 1; // Temporalmente se usa un ID de usuario fijo
+      this.cartService.addToCart(this.product.id, userId).subscribe(
+        () => console.log('Producto agregado al carrito en la base de datos:', this.product),
+        (error) => console.error('Error al agregar producto al carrito:', error)
+      );
     }
   }
+  
 
   getFormattedPrice(): string {
     if (this.product?.price != null) {

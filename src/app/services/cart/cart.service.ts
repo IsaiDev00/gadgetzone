@@ -1,71 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../../models/product.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CartItem } from '../../models/cart.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
-  private items: Product[] = [];
+  private apiUrl = 'https://gadgetzone-queries-534526154363.us-central1.run.app/cart';
 
-  constructor() {
-    const savedCart = localStorage.getItem('cartItems');
-    if (savedCart) {
-      this.items = JSON.parse(savedCart);
-    }
+  constructor(private http: HttpClient) {}
+
+  // Agregar producto al carrito en la base de datos
+  addToCart(productId: number, userId: number, quantity: number = 1): Observable<CartItem> {
+    const cartItem = { userId, productId, quantity };
+    return this.http.post<CartItem>(this.apiUrl, cartItem);
   }
 
-  addToCart(product: Product) {
-    this.items.push(product);
-    this.saveCart();
-    console.log('Producto agregado al carrito:', product);
+  // Obtener todos los productos del carrito de un usuario específico
+  getCartItems(userId: number): Observable<CartItem[]> {
+    return this.http.get<CartItem[]>(`${this.apiUrl}/${userId}`);
   }
 
-  getItems() {
-    return this.items;
+  // Eliminar un ítem del carrito por ID
+  removeCartItem(cartId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${cartId}`);
   }
 
-  clearCart() {
-    this.items = [];
-    this.saveCart();
-  }
-
-  removeItem(product: Product) {
-    this.items = this.items.filter(item => item !== product);
-    this.saveCart();
-  }
-
-  saveCart() {
-    localStorage.setItem('cartItems', JSON.stringify(this.items));
-  }
-
-  calculateTotal() {
-    const subtotal = this.items.reduce((total, item) => total + (item.price || 0), 0);
-    const tax = subtotal * 0.16; // Asumiendo un 16% de impuestos
-    const shipping = this.items.length > 0 ? 50 : 0; // Ejemplo de costo de envío
-    return { subtotal, tax, shipping, total: subtotal + tax + shipping };
-  }
+// Actualizar la cantidad de un ítem del carrito
+updateCartItemQuantity(cartId: number, quantity: number): Observable<void> {
+  return this.http.put<void>(`${this.apiUrl}/${cartId}`, { quantity });
 }
 
 
-/*import { Injectable } from '@angular/core';
-import { Product } from '../../models/product.model';
-
-@Injectable({
-  providedIn: 'root' // Esto hace que el servicio esté disponible globalmente
-})
-export class CartService {
-  private items: Product[] = [];
-
-  addToCart(product: Product) {
-    this.items.push(product);
-    console.log('Producto agregado al carrito:', product);
-  }
-
-  getItems() {
-    return this.items;
-  }
-
-  clearCart() {
-    this.items = [];
-  }
-}*/
+}

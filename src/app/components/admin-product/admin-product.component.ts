@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product/product.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Asegúrate de importar FormsModule
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-product',
   templateUrl: './admin-product.component.html',
-  styleUrl:'./admin-product.component.css',
+  styleUrls: ['./admin-product.component.css'], // Corregido styleUrls
   standalone: true,
-  imports: [CommonModule, FormsModule], // Agrega FormsModule aquí
+  imports: [CommonModule, FormsModule],
 })
 export class AdminProductComponent implements OnInit {
   products: Product[] = [];
-  selectedProduct: Product = { id: 0, name: '', description: '', price: 0, stock: 0, imageUrl: '' };
+  selectedProduct: Product = { id: 0, name: '', description: '', price: 0, stock: 0, imageUrl: '', active: true }; // Añadido 'active'
   isEditing = false;
-searchTerm: any;
+  searchTerm: any;
 
   constructor(private productService: ProductService) {}
 
@@ -25,10 +25,10 @@ searchTerm: any;
 
   loadProducts() {
     this.productService.getProducts().subscribe(
-      products => {
+      (products) => {
         this.products = products;
       },
-      error => {
+      (error) => {
         console.error('Error al cargar productos:', error);
       }
     );
@@ -40,7 +40,7 @@ searchTerm: any;
         this.loadProducts(); // Recargar lista de productos
         this.clearSelection();
       },
-      error => {
+      (error) => {
         console.error('Error al agregar producto:', error);
       }
     );
@@ -57,21 +57,21 @@ searchTerm: any;
         this.loadProducts();
         this.clearSelection();
       },
-      error => {
+      (error) => {
         console.error('Error al actualizar producto:', error);
       }
     );
   }
 
-  deleteProduct(productId: number) {
+  deleteProduct(productId: number) { // Asegurando que 'productId' sea de tipo number
     this.productService.deleteProduct(productId).subscribe(
       () => this.loadProducts(),
-      error => console.error('Error al eliminar producto:', error)
+      (error) => console.error('Error al eliminar producto:', error)
     );
   }
 
   clearSelection() {
-    this.selectedProduct = { id: 0, name: '', description: '', price: 0, stock: 0, imageUrl: '' };
+    this.selectedProduct = { id: 0, name: '', description: '', price: 0, stock: 0, imageUrl: '', active: true }; // Añadido 'active'
     this.isEditing = false;
   }
 }

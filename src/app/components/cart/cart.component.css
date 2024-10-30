@@ -1,0 +1,136 @@
+/* Estilo principal del contenedor del carrito */
+.cart-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título del carrito */
+  .cart-container h2 {
+    text-align: left;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.8em;
+  }
+  
+  /* Contenedor de ítems del carrito */
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Estilo de cada ítem del carrito */
+  .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+  }
+  
+  /* Estilo de la información del producto */
+  .item-details {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* Imagen del producto */
+  .item-details img {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  /* Información del producto */
+  .product-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Nombre del producto */
+  .product-info h3 {
+    margin: 0;
+    font-size: 1.4em;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Descripción del producto */
+  .product-info p.description {
+    margin: 5px 0;
+    color: #777;
+    font-size: 0.9em;
+  }
+  
+  /* Precio del producto */
+  .product-info p.price {
+    margin: 5px 0;
+    font-weight: bold;
+    color: #111;
+    font-size: 1.2em;
+  }
+  
+  /* Precio con descuento */
+  .product-info p.discount {
+    color: #e74c3c;
+    font-size: 1em;
+  }
+  
+  /* Controles de cantidad */
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .quantity-controls button {
+    background-color: #ddd;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .quantity-controls button:hover {
+    background-color: #ccc;
+  }
+  
+  .quantity-controls span {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  /* Botón para eliminar el producto con ícono de Bootstrap */
+  .remove-btn {
+    background-color: transparent;
+    color: #e74c3c;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .remove-btn:hover {
+    color: #c0392b;
+  }
+  
+  .remove-btn i {
+    font-size: 1.5em;
+  }
+  
+  /* Mensaje del carrito vacío */
+  .empty-cart {
+    text-align: center;
+    font-size: 1.2em;
+    color: #777;
+  }
+  

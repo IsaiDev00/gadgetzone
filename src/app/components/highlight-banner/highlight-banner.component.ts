@@ -16,7 +16,7 @@ export class HighlightBannerComponent implements AfterViewInit {
     if (this.highlightCarousel) {
       const carouselElement = this.highlightCarousel.nativeElement;
       this.carouselInstance = new bootstrap.Carousel(carouselElement, {
-        interval: 5000, // Tiempo de espera entre imágenes (en ms)
+        interval: 3000, // Tiempo de espera entre imágenes (en ms)
         ride: 'carousel'
       });
     }

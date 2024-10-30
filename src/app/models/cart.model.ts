@@ -1,5 +1,8 @@
-export interface Product {
-  id: number; // Cambia bigint a number (veremos esto a continuación)
+export interface CartItem {
+  cartId: number;
+  userId: number;
+  productId: number;
+  quantity: number;
   name: string;
   description?: string;
   specifications?: string;

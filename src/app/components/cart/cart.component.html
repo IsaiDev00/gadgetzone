@@ -1,0 +1,27 @@
+<div class="cart-container">
+  <h2>Carrito de Compras</h2>
+  <div *ngIf="cartItems.length > 0; else emptyCart" class="cart-items">
+    <div class="cart-item" *ngFor="let item of cartItems; trackBy: trackByCartItem">
+      <div class="item-details">
+        <img [src]="item.imageUrl || 'https://via.placeholder.com/150'" [alt]="item.name || 'Imagen no disponible'" />
+        <div class="product-info">
+          <h3>{{ item.name || 'Producto no encontrado' }}</h3>
+          <p class="description">{{ item.description || 'Sin descripción' }}</p>
+          <p class="price">Precio: {{ getProductPrice(item) }}</p>
+        </div>
+      </div>
+      <div class="quantity-controls">
+        <button (click)="decreaseQuantity(item)">-</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="increaseQuantity(item)">+</button>
+      </div>
+      <button class="remove-btn" (click)="removeFromCart(item)">
+        <i class="bi bi-trash"></i> <!-- Ícono de Bootstrap -->
+      </button>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <p>El carrito está vacío.</p>
+  </ng-template>
+</div>

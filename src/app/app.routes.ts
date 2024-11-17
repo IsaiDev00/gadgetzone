@@ -10,19 +10,21 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { TermsComponent } from './components/terms/terms.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { AdminGuard } from './guards/admin.guard';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/productos', pathMatch: 'full' },
   { path: 'productos', component: ProductListComponent },
   { path: 'carrito', component: CartComponent },
-  { path: 'cuenta', component: RegisterComponent },
   { path: 'producto/:id', component: ProductDetailComponent },
-  { path: 'product-management', component: ProductManagementComponent },
+  { path: 'product-management', component: ProductManagementComponent, canActivate: [AdminGuard] }, // Protegido por AdminGuard
   { path: 'thank-you', component: ThankYouComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent }, // Mantén solo esta ruta para registro
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'terms', component: TermsComponent},
-  { path: 'privacy', component: PrivacyComponent},
-  { path: 'contact', component: ContactComponent}
+  { path: 'terms', component: TermsComponent },
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'profile-edit', component: ProfileEditComponent }, // Agregada para el perfil del usuario autenticado
 ];

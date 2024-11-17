@@ -1,0 +1,55 @@
+<div class="profile-edit-container">
+  <h2>Editar Perfil</h2>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': profileForm.get('name')?.invalid && profileForm.get('name')?.touched
+        }"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Correo Electrónico</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        class="form-control"
+        [disabled]="true"
+      />
+    </div>
+    
+    <div class="form-group">
+      <label for="address">Dirección</label>
+      <input
+        id="address"
+        type="text"
+        formControlName="address"
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Teléfono</label>
+      <input
+        id="phone"
+        type="text"
+        formControlName="phone"
+        class="form-control"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">
+      Guardar Cambios
+    </button>
+    <button type="button" class="btn btn-danger logout-btn" (click)="onLogout()">
+      Cerrar Sesión
+    </button>
+  </form>
+</div>

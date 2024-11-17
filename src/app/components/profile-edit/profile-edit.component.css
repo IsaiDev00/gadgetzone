@@ -1,0 +1,15 @@
+.logout-btn {
+  margin-top: 20px;
+  background-color: #dc3545; /* Rojo */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #c82333; /* Un rojo más oscuro */
+}

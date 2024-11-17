@@ -1,5 +1,5 @@
 export interface Product {
-  id: number; // Cambia bigint a number (veremos esto a continuación)
+  id: number;
   name: string;
   description?: string;
   specifications?: string;

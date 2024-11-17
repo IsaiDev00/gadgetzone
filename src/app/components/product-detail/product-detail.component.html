@@ -18,9 +18,18 @@
           <p class="card-text">{{ product.description || 'Descripción no disponible' }}</p>
           <p class="card-text">
             <strong>Precio:</strong> {{ getFormattedPrice() }}
-          </p>                 
+          </p>
           <p class="card-text">
             <strong>Stock:</strong> {{ product.stock != null ? product.stock : 'No disponible' }}
+          </p>
+          <p class="card-text">
+            <strong>Especificaciones:</strong>
+            <span *ngIf="product.specifications; else noSpecs">
+              {{ product.specifications }}
+            </span>
+            <ng-template #noSpecs>
+              No especificaciones disponibles.
+            </ng-template>
           </p>
           <button class="btn btn-primary mt-3" (click)="addToCart()">Agregar al Carrito</button>
         </div>

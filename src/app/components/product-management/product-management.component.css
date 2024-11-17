@@ -1,0 +1,186 @@
+/* Ajustes generales */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9fafc;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h3 {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Contenedor del formulario */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.form-container form {
+  display: grid;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Estilo uniforme para campos de entrada */
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Estilo para los botones */
+button[type="submit"],
+button[type="button"] {
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #333;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button[type="submit"] {
+  border-color: #00c907;
+  color: #00d507;
+}
+
+button[type="submit"]:hover {
+  background-color: #00c507;
+  color: white;
+}
+
+button[type="button"] {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+button[type="button"]:hover {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* Contenedor para los botones del formulario */
+.button-container {
+  display: flex;
+  gap: 10px; /* Espaciado entre botones */
+  justify-content: flex-start;
+}
+
+/* Ajuste de la casilla de verificación */
+label[for="active"] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+/* Tabla */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.product-table th,
+.product-table td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  color: #333;
+}
+
+.product-table th {
+  background-color: #f0f0f0;
+}
+
+.product-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.action-btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-right: 5px; /* Añadida separación entre botones */
+}
+
+.edit-btn {
+  border: 1px solid #e6b800;
+  background-color: white;
+  color: #ffcc00;
+}
+
+.edit-btn:hover {
+  background-color: #ffcc00;
+  color: white;
+}
+
+.delete-btn {
+  border: 1px solid #e74c3c;
+  background-color: white;
+  color: #e74c3c;
+}
+
+.delete-btn:hover {
+  background-color: #e74c3c;
+  color: white;
+}
+
+/* Paginación */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  border: 1px solid #ddd;
+  background-color: transparent;
+  color: #333;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #4a90e2;
+  color: white;
+}

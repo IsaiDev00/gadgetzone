@@ -19,11 +19,11 @@ export class ProductListComponent {
 
   ngOnInit() {
     this.productService.getProducts().subscribe(
-      products => {
+      (products) => {
         console.log('Productos recibidos:', products); // Verificar la estructura de los productos
         this.products = products;
       },
-      error => {
+      (error) => {
         console.error('Error al cargar los productos:', error);
       }
     );
@@ -32,5 +32,10 @@ export class ProductListComponent {
   getFormattedPrice(price: any): string {
     const numericPrice = parseFloat(price);
     return !isNaN(numericPrice) ? numericPrice.toFixed(2) : '0.00';
+  }
+
+  isLCP(product: Product): boolean {
+    // Determina si este producto es el primer elemento en la lista
+    return this.products.indexOf(product) === 0;
   }
 }

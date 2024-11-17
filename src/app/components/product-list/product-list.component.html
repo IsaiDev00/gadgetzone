@@ -3,10 +3,19 @@
 <div class="product-grid">
   <div *ngFor="let product of products" class="product-card">
     <div class="product-image">
-      <img [src]="product.imageUrl ? product.imageUrl : 'https://via.placeholder.com/150'" [alt]="product.name ? product.name : 'Product without name'">
+      <img
+        [src]="product.imageUrl || 'https://via.placeholder.com/150'"
+        [srcset]="
+          (product.imageUrl || 'https://via.placeholder.com/150') + ' 600w, ' +
+          (product.imageUrl || 'https://via.placeholder.com/150') + ' 1200w'
+        "
+        sizes="(max-width: 768px) 100vw, 50vw"
+        [alt]="product.name || 'Producto sin nombre'"
+        [loading]="isLCP(product) ? 'eager' : 'lazy'"
+      />
     </div>
     <div class="product-details">
-      <h3>{{ product.name ? product.name : 'Product without name' }}</h3>
+      <h3>{{ product.name || 'Producto sin nombre' }}</h3>
     </div>
     <a class="btn product-button" [routerLink]="['/producto', product.id]">Ver Detalles</a>
   </div>

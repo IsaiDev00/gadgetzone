@@ -8,37 +8,32 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class CartService {
-  private apiUrl = 'https://gadgetzone-queries-534526154363.us-central1.run.app/cart';
+  private apiUrl = 'https://gadgetzone-api-534526154363.us-central1.run.app/cart';
 
   constructor(private http: HttpClient) {}
 
-  // Agregar producto al carrito en la base de datos
   addToCart(productId: number, userId: number, quantity: number = 1): Observable<CartItem> {
     const cartItem = { userId, productId, quantity };
     return this.http.post<CartItem>(this.apiUrl, cartItem);
   }
 
-  // Obtener todos los productos del carrito de un usuario específico
   getCartItems(userId: number): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(`${this.apiUrl}/${userId}`);
   }
 
-  // Eliminar un ítem del carrito por ID
   removeCartItem(cartId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${cartId}`);
   }
 
-// Actualizar la cantidad de un ítem del carrito
-updateCartItemQuantity(cartId: number, quantity: number): Observable<void> {
-  return this.http.put<void>(`${this.apiUrl}/${cartId}`, { quantity });
-}
+  updateCartItemQuantity(cartId: number, quantity: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${cartId}`, { quantity });
+  }
 
-// Crear una sesión de checkout con Stripe
-createCheckoutSession(userId: number): Observable<any> {
-  return this.http.post<any>(`${this.apiUrl}/create-checkout-session/${userId}`, {});
-}
 
-  // Obtener el recibo en formato XML
+  createCheckoutSession(userId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/create-checkout-session/${userId}`, {});
+  }
+
   getReceipt(userId: number): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/receipt/${userId}`, {
       responseType: 'blob',

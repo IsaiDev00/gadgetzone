@@ -1,0 +1,81 @@
+<h2>Gestión de Productos</h2>
+
+<!-- Formulario -->
+<div class="form-container">
+  <h3 style="font-size: 16px;">{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h3>
+  <form (ngSubmit)="isEditing ? updateProduct() : addProduct()">
+    <label>Nombre:</label>
+    <input [(ngModel)]="selectedProduct.name" name="name" required />
+
+    <label>Descripción:</label>
+    <textarea [(ngModel)]="selectedProduct.description" name="description"></textarea>
+
+    <label>Precio:</label>
+    <input type="number" [(ngModel)]="selectedProduct.price" name="price" min="0" required />
+
+    <label>Stock:</label>
+    <input type="number" [(ngModel)]="selectedProduct.stock" name="stock" min="0" required />
+
+    <label>Imagen URL:</label>
+    <input [(ngModel)]="selectedProduct.imageUrl" name="imageUrl" />
+
+    <label for="active">
+      Activo:
+      <input id="active" type="checkbox" [(ngModel)]="selectedProduct.active" name="active" />
+    </label>
+
+    <div class="button-container">
+      <button type="submit">{{ isEditing ? 'Actualizar' : 'Agregar' }} Producto</button>
+      <button type="button" (click)="clearSelection()">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+<!-- Buscador -->
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Buscar productos..."
+    class="search-input"
+  />
+</div>
+
+<!-- Tabla -->
+<table class="product-table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th>Activo</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of filteredProducts()">
+      <td>{{ product.name }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>{{ product.stock }}</td>
+      <td>{{ product.active ? 'Sí' : 'No' }}</td>
+      <td>
+        <button class="action-btn edit-btn" (click)="editProduct(product)">Editar</button>
+        <button class="action-btn delete-btn" (click)="deleteProduct(product.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Paginación -->
+<div
+  class="pagination"
+  *ngIf="!isSearchActive && products.length > itemsPerPage"
+>
+  <button
+    *ngFor="let page of pages; let i = index"
+    [class.active]="currentPage === i"
+    (click)="goToPage(i)"
+  >
+    {{ i + 1 }}
+  </button>
+</div>

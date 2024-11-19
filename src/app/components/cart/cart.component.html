@@ -3,7 +3,7 @@
   <div *ngIf="cartItems.length > 0; else emptyCart" class="cart-items">
     <div class="cart-item" *ngFor="let item of cartItems; trackBy: trackByCartItem">
       <div class="item-details">
-        <img [src]="item.imageUrl || 'https://via.placeholder.com/150'" [alt]="item.name || 'Imagen no disponible'" />
+        <img [src]="item.image_url || 'https://via.placeholder.com/150'" [alt]="item.name || 'Imagen no disponible'" />
         <div class="product-info">
           <h3>{{ item.name || 'Producto no encontrado' }}</h3>
           <p class="description">{{ item.description || 'Sin descripción' }}</p>

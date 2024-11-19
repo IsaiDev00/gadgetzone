@@ -13,7 +13,17 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProductManagementComponent implements OnInit {
   products: Product[] = [];
-  selectedProduct: Product = { id: 0, name: '', description: '', price: 0, stock: 0, imageUrl: '', active: true };
+  selectedProduct: Product = {
+    id: 0,
+    name: '',
+    description: '',
+    specifications: '',
+    price: 0,
+    image_url: '',
+    stock: 0,
+    active: true,
+  };
+  
   isEditing = false;
   searchTerm: string = '';
   currentPage = 0;
@@ -61,7 +71,16 @@ export class ProductManagementComponent implements OnInit {
   }
 
   clearSelection() {
-    this.selectedProduct = { id: 0, name: '', description: '', price: 0, stock: 0, imageUrl: '', active: true };
+    this.selectedProduct = {
+      id: 0,
+      name: '',
+      description: '',
+      specifications: '',
+      price: 0,
+      stock: 0,
+      image_url: '',
+      active: true,
+    };
     this.isEditing = false;
   }
 

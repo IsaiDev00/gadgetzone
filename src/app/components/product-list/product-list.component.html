@@ -4,10 +4,10 @@
   <div *ngFor="let product of products" class="product-card">
     <div class="product-image">
       <img
-        [src]="product.imageUrl || 'https://via.placeholder.com/150'"
+        [src]="product.image_url || 'https://via.placeholder.com/150'"
         [srcset]="
-          (product.imageUrl || 'https://via.placeholder.com/150') + ' 600w, ' +
-          (product.imageUrl || 'https://via.placeholder.com/150') + ' 1200w'
+          (product.image_url || 'https://via.placeholder.com/150') + ' 600w, ' +
+          (product.image_url || 'https://via.placeholder.com/150') + ' 1200w'
         "
         sizes="(max-width: 768px) 100vw, 50vw"
         [alt]="product.name || 'Producto sin nombre'"

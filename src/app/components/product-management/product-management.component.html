@@ -1,6 +1,5 @@
 <h2>Gestión de Productos</h2>
 
-<!-- Formulario -->
 <div class="form-container">
   <h3 style="font-size: 16px;">{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h3>
   <form (ngSubmit)="isEditing ? updateProduct() : addProduct()">
@@ -10,6 +9,9 @@
     <label>Descripción:</label>
     <textarea [(ngModel)]="selectedProduct.description" name="description"></textarea>
 
+    <label>Especificaciones:</label>
+    <textarea [(ngModel)]="selectedProduct.specifications" name="specifications"></textarea>
+
     <label>Precio:</label>
     <input type="number" [(ngModel)]="selectedProduct.price" name="price" min="0" required />
 
@@ -17,7 +19,7 @@
     <input type="number" [(ngModel)]="selectedProduct.stock" name="stock" min="0" required />
 
     <label>Imagen URL:</label>
-    <input [(ngModel)]="selectedProduct.imageUrl" name="imageUrl" />
+    <input [(ngModel)]="selectedProduct.image_url" name="image_url" />
 
     <label for="active">
       Activo:
@@ -25,13 +27,12 @@
     </label>
 
     <div class="button-container">
-      <button type="submit">{{ isEditing ? 'Actualizar' : 'Agregar' }} Producto</button>
+      <button type="submit">{{ isEditing ? 'Actualizar Producto' : 'Agregar Producto' }}</button>
       <button type="button" (click)="clearSelection()">Cancelar</button>
     </div>
   </form>
 </div>
 
-<!-- Buscador -->
 <div class="search-container">
   <input
     type="text"
@@ -41,7 +42,6 @@
   />
 </div>
 
-<!-- Tabla -->
 <table class="product-table">
   <thead>
     <tr>
@@ -66,7 +66,6 @@
   </tbody>
 </table>
 
-<!-- Paginación -->
 <div
   class="pagination"
   *ngIf="!isSearchActive && products.length > itemsPerPage"

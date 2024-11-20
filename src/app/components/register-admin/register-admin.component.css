@@ -1,0 +1,78 @@
+.register-Admin-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  input.form-control.is-invalid {
+    border-color: #dc3545;
+  }
+  
+  .invalid-feedback {
+    color: #dc3545;
+    font-size: 0.9em;
+  }
+  
+  button.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .error-message p {
+    color: #dc3545;
+    text-align: center;
+    font-size: 0.9em;
+  }
+  
+  .text-primary {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .text-primary:hover {
+    text-decoration: underline;
+  }
+
+  .link {
+    color: #007bff; /* Azul típico de enlaces */
+    text-decoration: underline; /* Subrayado como enlace */
+    cursor: pointer;
+  }
+  
+  .link:hover {
+    color: #0056b3; /* Cambia el color al pasar el ratón */
+  }
+  
+  

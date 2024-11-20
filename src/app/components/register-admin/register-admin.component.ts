@@ -5,13 +5,13 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-register-admin',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  templateUrl: './register-admin.component.html',
+  styleUrls: ['./register-admin.component.css'],
 })
-export class RegisterComponent {
+export class RegisterAdminComponent {
   registerForm: FormGroup;
   errorMessage: string = '';
 
@@ -28,7 +28,7 @@ export class RegisterComponent {
           Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/),
         ],
       ],
-      role: ['user'], // Por defecto, el rol será "user"
+      role: ['admin'],
     });
   }
 
@@ -36,10 +36,10 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       const { email, password, fullName, role } = this.registerForm.value;
 
-      this.authService.register(email, password, fullName, role).subscribe({
+      this.authService.registerAdmin(email, password, fullName, role).subscribe({
         next: () => {
           alert('Usuario registrado correctamente');
-          this.router.navigate(['/login']); // Redirige al login después de registrar
+          this.router.navigate(['/productos']);
         },
         error: (err) => {
           console.error('Error al registrar usuario:', err);

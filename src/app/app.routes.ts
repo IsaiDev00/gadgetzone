@@ -12,6 +12,7 @@ import { PrivacyComponent } from './components/privacy/privacy.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AdminGuard } from './guards/admin.guard';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+import { RegisterAdminComponent } from './components/register-admin/register-admin.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/productos', pathMatch: 'full' },
@@ -26,5 +27,6 @@ export const routes: Routes = [
   { path: 'terms', component: TermsComponent },
   { path: 'privacy', component: PrivacyComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'profile-edit', component: ProfileEditComponent }, // Agregada para el perfil del usuario autenticado
+  { path: 'profile-edit', component: ProfileEditComponent },
+  { path: 'register-admin', component: RegisterAdminComponent}
 ];

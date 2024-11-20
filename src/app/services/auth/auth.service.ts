@@ -35,6 +35,22 @@ export class AuthService {
     );
   }
 
+  registerAdmin(email: string, password: string, name: string, role: string = 'admin'): Observable<any> {
+    return from(this.afAuth.createUserWithEmailAndPassword(email, password)).pipe(
+      switchMap((userCredential) => {
+        const firebaseU = userCredential.user?.uid;
+        if (!firebaseU) {
+          throw new Error('Error al obtener el UID de Firebase.');
+        }
+        return this.http.post(this.apiUrl, { firebaseUserId: firebaseU, name, email, role });
+      }),
+      catchError((error) => {
+        console.error('Error en el registro híbrido:', error);
+        throw error;
+      })
+    );
+  }
+
   login(email: string, password: string): Observable<any> {
     return from(this.afAuth.signInWithEmailAndPassword(email, password)).pipe(
       map((userCredential) => {

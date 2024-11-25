@@ -1,9 +1,14 @@
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Asegura que los botones estén separados */
+  margin-top: 20px; /* Espaciado superior */
+}
+
 .logout-btn {
-  margin-top: 20px;
   background-color: #dc3545; /* Rojo */
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 20px; /* Ajusta el padding para mayor consistencia */
   border-radius: 4px;
   font-size: 1em;
   cursor: pointer;

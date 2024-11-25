@@ -15,7 +15,9 @@
       <div class="col-md-6">
         <div class="card-body">
           <h1 class="card-title">{{ product.name || 'Producto sin nombre' }}</h1>
-          <p class="card-text">{{ product.description || 'Descripción no disponible' }}</p>
+          <p class="card-text">
+            <strong>Descripción:</strong> {{ product.description || 'Descripción no disponible' }}
+          </p>
           <p class="card-text">
             <strong>Precio:</strong> {{ getFormattedPrice() }}
           </p>
@@ -31,6 +33,9 @@
               No especificaciones disponibles.
             </ng-template>
           </p>
+          <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
           <button class="btn btn-primary mt-3" (click)="addToCart()">Agregar al Carrito</button>
         </div>
       </div>

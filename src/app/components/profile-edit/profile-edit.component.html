@@ -45,11 +45,14 @@
       />
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">
-      Guardar Cambios
-    </button>
-    <button type="button" class="btn btn-danger logout-btn" (click)="onLogout()">
-      Cerrar Sesión
-    </button>
+    <div class="button-container">
+      <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">
+        Guardar Cambios
+      </button>
+      <button type="button" class="btn btn-danger logout-btn" (click)="onLogout()">
+        Cerrar Sesión
+      </button>
+    </div>
+    
   </form>
 </div>

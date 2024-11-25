@@ -12,3 +12,9 @@
     border-radius: 12px 0 0 12px;
   }
   
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  

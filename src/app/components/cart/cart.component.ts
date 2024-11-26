@@ -111,6 +111,7 @@ export class CartComponent implements OnInit {
       this.cartService.createCheckoutSession(this.firebaseUserId).subscribe(
         (response: any) => {
           if (response.url) {
+            this.cartItems = [];
             window.location.href = response.url;
           }
         },
@@ -120,19 +121,27 @@ export class CartComponent implements OnInit {
   }
 
   downloadReceipt() {
-    if (this.firebaseUserId) {
-      this.cartService.getReceipt(this.firebaseUserId).subscribe(
-        (response) => {
-          const blob = new Blob([response], { type: 'application/xml' });
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'receipt.xml';
-          a.click();
-          window.URL.revokeObjectURL(url);
-        },
-        (error) => console.error('Error al descargar el recibo:', error)
-      );
-    }
-  }
+    this.authService.getFirebaseUserId().subscribe((firebaseUserId) => {
+      if (firebaseUserId) {
+        this.cartService.downloadReceipt(firebaseUserId).subscribe(
+          (response) => {
+            const blob = new Blob([response], { type: 'application/xml' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'receipt.xml';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+          },
+          (error) => {
+            console.error('Error al descargar el recibo:', error);
+          }
+        );
+      } else {
+        console.error('Usuario no autenticado');
+      }
+    });
+  }  
 }

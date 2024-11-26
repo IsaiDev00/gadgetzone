@@ -32,14 +32,14 @@ export class ProductService {
     return this.http.post<Product>(this.apiUrl, product);
   }
   
-  updateProduct(product: Product): Observable<Product> {
+  updateProduct(product: Product): Observable<{ success: boolean; message: string }> {
     console.log('Payload enviado a PUT:', product);
-    return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product);
+    return this.http.put<{ success: boolean; message: string }>(`${this.apiUrl}/${product.id}`, product);
   }  
 
-  deleteProduct(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
+  deleteProduct(id: number): Observable<{ success: boolean; message: string }> {
+    return this.http.delete<{ success: boolean; message: string }>(`${this.apiUrl}/${id}`);
+  }  
 
   searchProducts(name: string): Observable<Product[]> {
     const url = `${this.apiUrl}/search?name=${encodeURIComponent(name)}`;

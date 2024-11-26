@@ -30,6 +30,7 @@ export class ProductManagementComponent implements OnInit {
   itemsPerPage = 10;
   isSearchActive = false;
   errorMessage: string = '';
+  successMessage: string = '';
 
   constructor(private productService: ProductService) {}
 
@@ -40,6 +41,13 @@ export class ProductManagementComponent implements OnInit {
   validateProductFields(): boolean {
     const { name, description, specifications, price, stock, image_url } = this.selectedProduct;
     return !!(name && description && specifications && price > 0 && stock > 0 && image_url);
+  }
+
+  showSuccessMessage(message: string) {
+    this.successMessage = message;
+    setTimeout(() => {
+      this.successMessage = '';
+    }, 3000);
   }
 
   loadProducts() {
@@ -60,6 +68,7 @@ export class ProductManagementComponent implements OnInit {
           this.loadProducts();
           this.clearSelection();
           this.errorMessage = '';
+          this.showSuccessMessage('Producto agregado exitosamente.');
         },
         (error) => {
           console.error('Error al agregar producto:', error);
@@ -69,7 +78,7 @@ export class ProductManagementComponent implements OnInit {
     } else {
       this.errorMessage = 'Todos los campos son obligatorios. Por favor, complétalos.';
     }
-  }
+  }  
 
   editProduct(product: Product) {
     this.selectedProduct = { ...product };
@@ -80,10 +89,15 @@ export class ProductManagementComponent implements OnInit {
   updateProduct() {
     if (this.validateProductFields()) {
       this.productService.updateProduct(this.selectedProduct).subscribe(
-        () => {
-          this.loadProducts();
-          this.clearSelection();
-          this.errorMessage = '';
+        (response: { success: boolean; message: string; product?: Product }) => {
+          if (response && response.success) {
+            this.loadProducts();
+            this.clearSelection();
+            this.errorMessage = '';
+            this.showSuccessMessage('Producto actualizado exitosamente.');
+          } else {
+            this.errorMessage = response.message || 'Ocurrió un error desconocido.';
+          }
         },
         (error) => {
           console.error('Error al actualizar producto:', error);
@@ -93,11 +107,24 @@ export class ProductManagementComponent implements OnInit {
     } else {
       this.errorMessage = 'Todos los campos son obligatorios. Por favor, complétalos.';
     }
-  }
+  }  
 
   deleteProduct(productId: number) {
-    this.productService.deleteProduct(productId).subscribe(() => this.loadProducts());
-  }
+    this.productService.deleteProduct(productId).subscribe(
+      (response: { success: boolean; message: string }) => {
+        if (response && response.success) {
+          this.loadProducts();
+          this.showSuccessMessage(response.message || 'Producto eliminado exitosamente.');
+        } else {
+          this.errorMessage = response.message || 'Ocurrió un error al eliminar el producto.';
+        }
+      },
+      (error) => {
+        console.error('Error al eliminar producto:', error);
+        this.errorMessage = 'Ocurrió un error al eliminar el producto. Inténtalo nuevamente.';
+      }
+    );
+  }  
 
   clearSelection() {
     this.selectedProduct = {

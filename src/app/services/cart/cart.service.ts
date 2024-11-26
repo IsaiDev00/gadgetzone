@@ -23,6 +23,12 @@ export class CartService {
     );
   }
 
+  downloadReceipt(firebaseUserId: string): Observable<string> {
+    return this.http.get(`${this.apiUrl}/download-receipt/${firebaseUserId}`, {
+      responseType: 'text',
+    });
+  }  
+
   getCartItems(firebaseUserId: string): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(`${this.apiUrl}/${firebaseUserId}`);
   }
@@ -43,5 +49,13 @@ export class CartService {
     return this.http.get(`${this.apiUrl}/receipt/${firebaseUserId}`, {
       responseType: 'blob',
     });
-  }
+  }  
+
+  checkoutSuccess(firebaseUserId: string): Observable<string> {
+    return this.http.post(`${this.apiUrl}/checkout-success`, { firebaseUserId }, { responseType: 'text' });
+  }  
+
+  clearCart(firebaseUserId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/clear/${firebaseUserId}`);
+  }  
 }

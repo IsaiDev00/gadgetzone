@@ -66,13 +66,13 @@
   }
 
   .link {
-    color: #007bff; /* Azul típico de enlaces */
-    text-decoration: underline; /* Subrayado como enlace */
+    color: #007bff;
+    text-decoration: underline;
     cursor: pointer;
   }
   
   .link:hover {
-    color: #0056b3; /* Cambia el color al pasar el ratón */
+    color: #0056b3;
   }
   
   

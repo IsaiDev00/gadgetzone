@@ -16,12 +16,12 @@ export class AdminGuard implements CanActivate {
         if (role === 'admin') {
           return true;
         } else {
-          this.router.navigate(['/productos']); // Redirige si no es admin
+          this.router.navigate(['/productos']);
           return false;
         }
       }),
       catchError(() => {
-        this.router.navigate(['/productos']); // Redirige en caso de error
+        this.router.navigate(['/productos']);
         return of(false);
       })
     );

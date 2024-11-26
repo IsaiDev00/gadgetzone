@@ -73,7 +73,7 @@ export class AuthService {
     console.log('getUserRole llamado');
     return this.afAuth.authState.pipe(
       switchMap((user) => {
-        console.log('Cambio detectado en authState:', user); // Log para depurar el estado
+        console.log('Cambio detectado en authState:', user);
         if (user?.uid) {
           console.log('UID detectado:', user.uid);
           return this.http.get<{ role: string }>(`${this.apiUrl}/firebase/${user.uid}`).pipe(
@@ -101,10 +101,10 @@ export class AuthService {
         if (user?.uid) {
           return this.http.get<any>(`${this.apiUrl}/firebase/${user.uid}`);
         } else {
-          return of(null); // Si no hay usuario autenticado, retorna null
+          return of(null);
         }
       }),
-      catchError(() => of(null)) // Manejo de errores
+      catchError(() => of(null))
     );
   }
   
@@ -112,14 +112,14 @@ export class AuthService {
     return from(this.afAuth.currentUser).pipe(
       switchMap((user) => {
         if (user?.uid) {
-          const payload = { ...data, firebaseUserId: user.uid }; // Asegúrate de incluir el firebaseUserId
-          return this.http.put(`${this.apiUrl}/firebase/${user.uid}`, payload, { responseType: 'text' }); // Cambia el tipo de respuesta a 'text'
+          const payload = { ...data, firebaseUserId: user.uid };
+          return this.http.put(`${this.apiUrl}/firebase/${user.uid}`, payload, { responseType: 'text' });
         } else {
           throw new Error('No hay usuario autenticado.');
         }
       })
     );
-  }  
+  } 
 
   getFirebaseUserId(): Observable<string | null> {
     return this.afAuth.authState.pipe(

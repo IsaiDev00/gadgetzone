@@ -28,7 +28,7 @@ export class RegisterComponent {
           Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/),
         ],
       ],
-      role: ['user'], // Por defecto, el rol será "user"
+      role: ['user'],
     });
   }
 
@@ -39,7 +39,7 @@ export class RegisterComponent {
       this.authService.register(email, password, fullName, role).subscribe({
         next: () => {
           alert('Usuario registrado correctamente');
-          this.router.navigate(['/login']); // Redirige al login después de registrar
+          this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error('Error al registrar usuario:', err);

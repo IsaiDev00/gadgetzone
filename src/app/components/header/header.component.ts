@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
   }
 
   updateAuthState() {
-    // Verifica si el usuario está autenticado
     this.authService.getFirebaseUserId().subscribe({
       next: (firebaseUserId) => {
         this.isAuthenticated = !!firebaseUserId;

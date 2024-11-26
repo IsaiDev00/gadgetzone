@@ -53,7 +53,7 @@ export class ProductListComponent {
         }
       );
     } else {
-      this.loadProducts(); // Si el campo está vacío, carga todos los productos
+      this.loadProducts();
     }
   }
 

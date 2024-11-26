@@ -18,7 +18,6 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService, private authService: AuthService) {}
 
   ngOnInit() {
-    // Obtener el firebaseUserId del usuario autenticado
     this.authService.getFirebaseUserId().subscribe((id) => {
       if (id) {
         this.firebaseUserId = id;
@@ -35,7 +34,6 @@ export class CartComponent implements OnInit {
         (cartItems) => {
           console.log('Items en el carrito recibidos:', cartItems);
 
-          // Unificar productos duplicados
           const itemMap = new Map<number, CartItem>();
           cartItems.forEach((item) => {
             if (itemMap.has(item.productId)) {

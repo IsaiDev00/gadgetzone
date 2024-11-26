@@ -28,12 +28,12 @@ export class ProductService {
   }
 
   addProduct(product: Product): Observable<Product> {
-    console.log('Payload enviado a POST:', product); // Verifica el payload aquí
+    console.log('Payload enviado a POST:', product);
     return this.http.post<Product>(this.apiUrl, product);
   }
   
   updateProduct(product: Product): Observable<Product> {
-    console.log('Payload enviado a PUT:', product); // Verifica el payload aquí
+    console.log('Payload enviado a PUT:', product);
     return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product);
   }  
 

@@ -19,9 +19,9 @@ export const routes: Routes = [
   { path: 'productos', component: ProductListComponent },
   { path: 'carrito', component: CartComponent },
   { path: 'producto/:id', component: ProductDetailComponent },
-  { path: 'product-management', component: ProductManagementComponent, canActivate: [AdminGuard] }, // Protegido por AdminGuard
+  { path: 'product-management', component: ProductManagementComponent, canActivate: [AdminGuard] },
   { path: 'thank-you', component: ThankYouComponent },
-  { path: 'register', component: RegisterComponent }, // Mantén solo esta ruta para registro
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'terms', component: TermsComponent },

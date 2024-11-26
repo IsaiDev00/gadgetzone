@@ -47,13 +47,11 @@ export class ProfileEditComponent implements OnInit {
     if (this.profileForm.valid) {
       const formData = this.profileForm.value;
   
-      // Incluye el rol actual en los datos enviados
       this.authService.getUserData().subscribe((user) => {
         if (user) {
-          formData.role = user.role; // Incluye el rol actual del usuario
+          formData.role = user.role;
           console.log('Formulario enviado con los siguientes datos (incluyendo rol):', formData);
   
-          // Envía los datos al backend
           this.authService.updateUserData(formData).subscribe({
             next: (response) => {
               console.log('Respuesta del servidor al actualizar:', response);
@@ -80,7 +78,7 @@ export class ProfileEditComponent implements OnInit {
     this.authService.logout().subscribe({
       next: () => {
         console.log('Sesión cerrada exitosamente');
-        this.router.navigate(['/login']); // Redirigir al login tras cerrar sesión
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         console.error('Error al cerrar sesión:', err);

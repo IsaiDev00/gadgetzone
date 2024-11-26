@@ -60,10 +60,10 @@
     max-width: 400px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #ffffff; /* Cambia a blanco puro */
+    background-color: #ffffff;
     border: 1px solid #ddd;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    color: #000; /* Asegúrate de que el texto sea visible */
+    color: #000;
   }
 
   .text-danger {

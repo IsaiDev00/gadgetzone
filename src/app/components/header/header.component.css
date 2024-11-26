@@ -1,7 +1,7 @@
 header {
     padding: 10px 0;
-    box-shadow: none; /* Eliminado el box-shadow */
-    border-bottom: none; /* Asegurarse de que no haya borde */
+    box-shadow: none;
+    border-bottom: none;
   }
   .navbar-brand h1 {
     font-family: 'font1', sans-serif;

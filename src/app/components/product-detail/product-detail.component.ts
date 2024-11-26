@@ -18,7 +18,7 @@ export class ProductDetailComponent implements OnInit {
   loading: boolean = true;
   firebaseUserId: string | null = null;
   errorMessage: string | null = null;
-  quantity: number = 1; // Cantidad seleccionada por el cliente
+  quantity: number = 1;
 
   constructor(
     private route: ActivatedRoute,

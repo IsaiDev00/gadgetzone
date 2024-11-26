@@ -33,6 +33,19 @@
               No especificaciones disponibles.
             </ng-template>
           </p>
+
+          <div class="form-group">
+            <label for="quantity"><strong>Cantidad:</strong></label>
+            <input
+              id="quantity"
+              type="number"
+              [(ngModel)]="quantity"
+              [min]="1"
+              [max]="product.stock || 1"
+              class="form-control"
+            />
+          </div>          
+
           <div *ngIf="errorMessage" class="error-message">
             {{ errorMessage }}
           </div>

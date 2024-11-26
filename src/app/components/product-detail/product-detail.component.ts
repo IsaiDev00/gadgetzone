@@ -5,11 +5,12 @@ import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../models/product.model';
 import { CartService } from '../../services/cart/cart.service';
 import { AuthService } from '../../services/auth/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './product-detail.component.html',
 })
 export class ProductDetailComponent implements OnInit {
@@ -17,6 +18,7 @@ export class ProductDetailComponent implements OnInit {
   loading: boolean = true;
   firebaseUserId: string | null = null;
   errorMessage: string | null = null;
+  quantity: number = 1; // Cantidad seleccionada por el cliente
 
   constructor(
     private route: ActivatedRoute,
@@ -54,24 +56,34 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() {
-    if (this.product && this.firebaseUserId) {
-      this.cartService.addToCart(this.product.id, this.firebaseUserId).subscribe(
-        () => {
-          console.log('Producto agregado al carrito en la base de datos:', this.product);
-          alert('Producto agregado al carrito.');
-        },
-        (error) => {
-          console.error('Error al agregar producto al carrito:', error);
-          alert('Ocurrió un error al agregar el producto al carrito. Inténtalo nuevamente.');
-        }
-      );
-    } else if (!this.firebaseUserId) {
-      console.error('No se pudo agregar al carrito: Usuario no autenticado.');
-      alert('Debes iniciar sesión para agregar productos al carrito.');
-    } else {
+    if (!this.product) {
       console.error('No se pudo agregar al carrito: Producto no encontrado.');
       alert('Producto no encontrado. Inténtalo nuevamente.');
+      return;
     }
+  
+    if (!this.firebaseUserId) {
+      console.error('No se pudo agregar al carrito: Usuario no autenticado.');
+      alert('Debes iniciar sesión para agregar productos al carrito.');
+      return;
+    }
+  
+    if (!this.quantity || this.quantity < 1 || this.quantity > this.product.stock) {
+      this.errorMessage = 'Por favor, selecciona una cantidad válida.';
+      return;
+    }
+  
+    this.cartService.addToCart(this.product.id, this.firebaseUserId, this.quantity).subscribe(
+      () => {
+        console.log(`Producto agregado al carrito: ${this.product?.name || 'Producto desconocido'}, Cantidad: ${this.quantity}`);
+        alert('Producto agregado al carrito.');
+        this.errorMessage = null;
+      },
+      (error) => {
+        console.error('Error al agregar producto al carrito:', error);
+        alert('Ocurrió un error al agregar el producto al carrito. Inténtalo nuevamente.');
+      }
+    );
   }  
 
   getFormattedPrice(): string {

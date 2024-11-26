@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CartItem } from '../../models/cart.model';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,12 @@ export class CartService {
 
   addToCart(productId: number, firebaseUserId: string, quantity: number = 1): Observable<CartItem> {
     const cartItem = { firebaseUserId, productId, quantity };
-    return this.http.post<CartItem>(this.apiUrl, cartItem);
+    return this.http.post<CartItem>(this.apiUrl, cartItem).pipe(
+      catchError((error) => {
+        console.error('Error al agregar producto al carrito:', error);
+        return throwError(() => new Error('No se pudo agregar el producto al carrito.'));
+      })
+    );
   }
 
   getCartItems(firebaseUserId: string): Observable<CartItem[]> {

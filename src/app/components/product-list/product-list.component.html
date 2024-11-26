@@ -1,17 +1,24 @@
 <app-highlight-banner></app-highlight-banner>
+<p><br></p>
 <h2>Catálogo de Productos</h2>
+
+<div class="search-bar">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (input)="onSearchInput($event)"
+    placeholder="Buscar productos por nombre"
+    class="form-control"
+  />
+</div>
+
 <div class="product-grid">
   <div *ngFor="let product of products" class="product-card">
     <div class="product-image">
       <img
         [src]="product.image_url || 'https://via.placeholder.com/150'"
-        [srcset]="
-          (product.image_url || 'https://via.placeholder.com/150') + ' 600w, ' +
-          (product.image_url || 'https://via.placeholder.com/150') + ' 1200w'
-        "
-        sizes="(max-width: 768px) 100vw, 50vw"
-        [alt]="product.name || 'Producto sin nombre'"
-        [loading]="isLCP(product) ? 'eager' : 'lazy'"
+        alt="{{ product.name || 'Producto sin nombre' }}"
+        class="img-fluid"
       />
     </div>
     <div class="product-details">

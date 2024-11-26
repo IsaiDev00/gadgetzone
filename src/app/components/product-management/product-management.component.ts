@@ -29,11 +29,17 @@ export class ProductManagementComponent implements OnInit {
   currentPage = 0;
   itemsPerPage = 10;
   isSearchActive = false;
+  errorMessage: string = '';
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
     this.loadProducts();
+  }
+
+  validateProductFields(): boolean {
+    const { name, description, specifications, price, stock, image_url } = this.selectedProduct;
+    return !!(name && description && specifications && price > 0 && stock > 0 && image_url);
   }
 
   loadProducts() {
@@ -48,22 +54,45 @@ export class ProductManagementComponent implements OnInit {
   }
 
   addProduct() {
-    this.productService.addProduct(this.selectedProduct).subscribe(() => {
-      this.loadProducts();
-      this.clearSelection();
-    });
+    if (this.validateProductFields()) {
+      this.productService.addProduct(this.selectedProduct).subscribe(
+        () => {
+          this.loadProducts();
+          this.clearSelection();
+          this.errorMessage = '';
+        },
+        (error) => {
+          console.error('Error al agregar producto:', error);
+          this.errorMessage = 'Ocurrió un error al agregar el producto. Inténtalo nuevamente.';
+        }
+      );
+    } else {
+      this.errorMessage = 'Todos los campos son obligatorios. Por favor, complétalos.';
+    }
   }
 
   editProduct(product: Product) {
     this.selectedProduct = { ...product };
     this.isEditing = true;
+    this.errorMessage = '';
   }
 
   updateProduct() {
-    this.productService.updateProduct(this.selectedProduct).subscribe(() => {
-      this.loadProducts();
-      this.clearSelection();
-    });
+    if (this.validateProductFields()) {
+      this.productService.updateProduct(this.selectedProduct).subscribe(
+        () => {
+          this.loadProducts();
+          this.clearSelection();
+          this.errorMessage = '';
+        },
+        (error) => {
+          console.error('Error al actualizar producto:', error);
+          this.errorMessage = 'Ocurrió un error al actualizar el producto. Inténtalo nuevamente.';
+        }
+      );
+    } else {
+      this.errorMessage = 'Todos los campos son obligatorios. Por favor, complétalos.';
+    }
   }
 
   deleteProduct(productId: number) {
@@ -82,6 +111,7 @@ export class ProductManagementComponent implements OnInit {
       active: true,
     };
     this.isEditing = false;
+    this.errorMessage = '';
   }
 
   filteredProducts() {

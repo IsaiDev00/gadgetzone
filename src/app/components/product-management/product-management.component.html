@@ -1,5 +1,7 @@
 <h2>Gestión de Productos</h2>
-
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
 <div class="form-container">
   <h3 style="font-size: 16px;">{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h3>
   <form (ngSubmit)="isEditing ? updateProduct() : addProduct()">

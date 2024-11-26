@@ -184,3 +184,14 @@ input[type="checkbox"] {
   background-color: #4a90e2;
   color: white;
 }
+
+.error-message {
+  color: #dc3545;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #f8d7da;
+  padding: 10px;
+  border: 1px solid #f5c2c7;
+  border-radius: 4px;
+}
